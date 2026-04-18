@@ -69,6 +69,7 @@ export default function App() {
       clearTimeout(failsafeLimit);
       subscription.unsubscribe();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Block the entire app from loading until we know EXACTLY who the user is

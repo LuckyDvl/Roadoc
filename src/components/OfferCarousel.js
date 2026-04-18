@@ -14,7 +14,7 @@ export default function OfferCarousel() {
       setCurrentOffer((prev) => (prev + 1) % offers.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, []);
+  }, [offers.length]);
 
   return (
     <div className="overflow-hidden px-4">

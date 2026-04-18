@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { ArrowLeft } from "lucide-react";
 import BookingModal from "../components/BookingModal";
 import MapComponent from "../components/MapComponent";

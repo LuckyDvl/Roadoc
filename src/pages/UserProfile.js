@@ -9,7 +9,6 @@ export default function UserProfile() {
   const [activeTab, setActiveTab] = useState("history");
   
   const [sessionUser, setSessionUser] = useState(null);
-  const [profile, setProfile] = useState(null);
   const [history, setHistory] = useState([]);
 
   // Form States
@@ -43,7 +42,6 @@ export default function UserProfile() {
         .single();
         
       if (profileData) {
-        setProfile(profileData);
         setMainForm({
           full_name: profileData.full_name || "",
           phone_number: profileData.phone_number || "",

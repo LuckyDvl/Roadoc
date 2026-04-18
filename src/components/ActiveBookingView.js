@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowDown, Maximize2, MapPin, Truck } from "lucide-react";
+import { ArrowDown, Maximize2, Truck } from "lucide-react";
 import MapComponent from "./MapComponent";
 
 export default function ActiveBookingView({ booking, userCoords }) {
