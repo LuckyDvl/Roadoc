@@ -22,10 +22,13 @@ export default function App() {
     // Absolute Failsafe: No matter what happens, unblock the screen in 3 seconds
     const failsafeLimit = setTimeout(() => {
       if (isMounted) {
-        if (session === undefined) setSession(null);
+        setSession(prev => {
+          if (prev === undefined) return null;
+          return prev;
+        });
         setUserRole(prev => prev ? prev : 'user');
       }
-    }, 3000);
+    }, 5000);
 
     const safeFetchRole = async (userId) => {
       try {
