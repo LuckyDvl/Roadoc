@@ -51,8 +51,14 @@ export default function MechanicDashboard({ session }) {
         setEditForm({ name: data.name, description: data.description || "", phone: data.phone || "", owner_name: data.owner_name || "" });
         fetchBookings(data.id);
 
+        const playTing = () => {
+          const audio = new Audio("https://actions.google.com/sounds/v1/alarms/beep_short.ogg");
+          audio.play().catch(e => console.error("Audio playback prevented:", e));
+        };
+
         channel = supabase.channel('bookings_channel')
-          .on('postgres_changes', { event: '*', schema: 'public', table: 'bookings', filter: `garage_id=eq.${data.id}` }, () => {
+          .on('postgres_changes', { event: '*', schema: 'public', table: 'bookings', filter: `garage_id=eq.${data.id}` }, (payload) => {
+            if (payload.eventType === 'INSERT') playTing();
             fetchBookings(data.id);
           }).subscribe();
       }

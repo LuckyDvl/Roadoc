@@ -27,7 +27,11 @@ export default function Home({ userRole, onSelectMechanic, userCoords, setUserCo
     const fetchGarages = async () => {
       const { data } = await supabase.from('garages').select('*');
       if (data && data.length > 0) {
-        setMockMechanics(data);
+        setMockMechanics(data.map(g => ({
+          ...g,
+          lat: g.latitude,
+          lng: g.longitude
+        })));
       }
     };
 

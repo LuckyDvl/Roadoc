@@ -40,6 +40,19 @@ export default function AdminDashboard({ userCoords }) {
 
   useEffect(() => {
     fetchUsers();
+
+    const adminChannel = supabase.channel('admin_live_feed')
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'garage_updates' }, () => {
+         fetchUsers();
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'profiles' }, () => {
+         fetchUsers();
+      })
+      .subscribe();
+
+    return () => {
+       supabase.removeChannel(adminChannel);
+    };
   }, []);
 
   const handleRoleChange = async (userId, newRole) => {
