@@ -67,7 +67,17 @@ export default function DetailPage({ mechanic, userCoords, onBack }) {
       </div>
 
       {/* BOOKING POPUP */}
-      {showBooking && <BookingModal onClose={() => setShowBooking(false)} mechanic={mechanic} userCoords={userCoords} />}
+      {showBooking && (
+        <BookingModal 
+           mechanic={mechanic} 
+           onClose={() => setShowBooking(false)} 
+           onBookingSuccess={() => {
+              setShowBooking(false);
+              onBack(); // Instantly clears selected mechanic, dropping UI down to ActiveBookingView
+           }}
+           userCoords={userCoords} 
+        />
+      )}
       
     </div>
   );

@@ -12,7 +12,7 @@ const loadRazorpayScript = () => {
   });
 };
 
-export default function BookingModal({ onClose, mechanic, userCoords }) {
+export default function BookingModal({ mechanic, isOpen, onClose, onBookingSuccess, userCoords }) {
   const [step, setStep] = useState(1);
   const [loading, setLoading] = useState(true);
   const [activeBooking, setActiveBooking] = useState(null);
@@ -89,7 +89,11 @@ export default function BookingModal({ onClose, mechanic, userCoords }) {
     if (error) {
       alert("Booking failed: " + error.message);
     } else {
-      onClose(); // Instantly trigger Home's live tracker
+      if (onBookingSuccess) {
+         onBookingSuccess();
+      } else {
+         onClose();
+      }
     }
     setProcessing(false);
   };
